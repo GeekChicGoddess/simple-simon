@@ -1,0 +1,25 @@
+.colorTile {
+    height: 10vw;
+    width: 10vw;
+    display: inline-block;
+}
+
+#green {
+    background-color: green;
+}
+
+#blue {
+    background-color: blue;
+}
+
+#red {
+    background-color: red
+}
+
+#purple {
+    background-color: purple;
+}
+h1 {
+    color: orangered;
+    display: none;
+}
