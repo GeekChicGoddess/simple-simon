@@ -1,7 +1,7 @@
-/** 0 = green // 1 = blue  2 = red // 3 = purple  */
 
 "use strict";
 var simonArray= [];
+var simonSoundArray = [];
 var playerArray=[];
 var randomTile;
 var tileID;
@@ -11,10 +11,30 @@ var index = 0;
 var simonArraylength = 0;
 var counter;
 var delay = 1000;
-function markTheTile(tileID, color, time){
-    $(tileID).css("background-color", "black");
-    setTimeout(function(){
-        $(tileID).css("background-color", color)}, time);
+var sound;
+var duckSound = new Audio("audio/quack.wav");
+duckSound.preLoad=true;
+duckSound.volume = .5;
+duckSound.playbackRate = 1.5;
+var redSound = new Audio("audio/red.wav");
+redSound.preLoad=true;
+redSound.volume = .5;
+redSound.playbackRate = 2;
+var greenSound = new Audio("audio/green.wav");
+greenSound.preLoad=true;
+greenSound.volume = .5;
+greenSound.playbackRate = 2;
+var yellowSound = new Audio("audio/yellow.wav");
+yellowSound.preLoad=true;
+yellowSound.volume = .5;
+yellowSound.playbackRate = 2;
+
+function markTheTile(sound, tileID, color) {
+    $(tileID).addClass("imageButtonFaded");
+    sound.play();
+    sound.onended = function () {
+        $(tileID).removeClass("imageButtonFaded")
+    }
 }
 function compareThePlays() {
     if (playerArray[index] === simonArray[index]){
@@ -26,43 +46,49 @@ function compareThePlays() {
     }
 }
 function play (){
- $(".colorTile").off('click', tileClick);
+ $(".imageButton").off('click', tileClick);
     simonArraylength = simonArray.length;
     counter = 0;
     index = 0;
     delay = 1000;
     randomTile = Math.floor(Math.random()* 3.9);
-    console.log(randomTile);
     switch (randomTile){
         case 0: {
             tileID = "#green";
             color = "green";
+            sound = greenSound;
             break;
         }
         case 1: {
-            tileID = "#blue";
-            color = "blue";
+            tileID = "#yellow";
+            color = "yellow";
+            sound = yellowSound;
             break;
         }
         case 2: {
             tileID = "#red";
             color = "red";
+            sound = redSound;
             break;
         }
         case 3: {
-            tileID = "#purple";
-            color = "purple";
+            tileID = "#duck";
+            color = "duck";
+            sound = duckSound;
             break;
         }
     }
+    simonSoundArray.push(sound);
+    console.log("array "+simonSoundArray);
     simonArray.push(color);
     while (counter < simonArraylength+1) {
         setTimeout(
             (function (counter) {
                 return function() {
                     color = simonArray[counter];
+                    sound = simonSoundArray[counter];
                     tileID = "#" + color;
-                    markTheTile(tileID, color, 500);
+                    markTheTile(sound, tileID, color);
                 }
             })(counter),delay);
         counter++;
@@ -70,27 +96,45 @@ function play (){
     }
 
     setTimeout(function(){
-        $(".colorTile").on("click",tileClick);
-    },delay+1000);
+        $(".imageButton").on("click",tileClick);
+    },delay);
     console.log(simonArray);
 }
 
 $("button").click(function(){
     $("h1").css("display", "none");
+    simonSoundArray=[];
     simonArray=[];
     playerArray=[];
     play()
 });
-// $(".colorTile"). click(tileClick);
 
 function tileClick() {
-    console.log("start tileclikc " + index);
     color = $(this).attr("id");
-    tileID = "#" + color;
+    switch (color){
+        case "green": {
+            tileID = "#green";
+            sound = greenSound;
+            break;
+        }
+        case "yellow": {
+            tileID = "#yellow";
+            sound = yellowSound;
+            break;
+        }
+        case "red": {
+            tileID = "#red";
+            sound = redSound;
+            break;
+        }
+        case "duck": {
+            tileID = "#duck";
+            sound = duckSound;
+            break;
+        }
+    }
     playerArray.push(color);
-    console.log(playerArray);
-    markTheTile(tileID, color, 500);
-    console.log(index);
+    markTheTile(sound, tileID, color);
     if (!compareThePlays()){
         gameMessage = "Game Over";
         $("h1").css("display","block");
@@ -103,7 +147,7 @@ function tileClick() {
         index = 0;
         setTimeout(function () {
             play()
-        },2500);
+        },1500);
     }
     else {
 
