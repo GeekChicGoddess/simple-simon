@@ -45,23 +45,24 @@ var winner = new Audio("audio/winner.wav");
 winner.preLoad=true;
 
 
-
-function markTheTile(sound, tileID, color) {
+function markTheTile(sound, tileID) { // play sound effect and brighten the cup/duck
     $(tileID).addClass("imageButtonFaded");
     sound.play();
     sound.onended = function () {
         $(tileID).removeClass("imageButtonFaded")
     }
 }
-function compareThePlays() {
+
+function compareThePlays() { // is the player's array matching the simon array?
     if (playerArray[index] === simonArray[index]){
-        index++
+        index++;
         return true;
     }
     else {
         return false;
     }
 }
+
 function play (){
     $("h1").css("display", "none");
     console.log(round);
@@ -238,14 +239,11 @@ function playerfunction() {
                     play()
                 }, 2000);
             }
-
             else {
                 setTimeout(function () {
                     play()
                 }, 1000);
             }
-
-
         }
         else {
 

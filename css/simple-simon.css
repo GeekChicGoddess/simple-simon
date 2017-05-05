@@ -25,6 +25,16 @@ body {
     z-index: -1;
 }
 
+h1 {
+    position: absolute;
+    margin-left: 23%;
+    margin-top: 15%;
+    font-size: 4vw;
+    color: white;
+    text-shadow: .1em .1em .05em #888;
+    line-height: 150%;
+    z-index: 2;
+}
 
 .imageButton {
     height: 15vw;
@@ -45,7 +55,6 @@ body {
 #green {
     margin-top: 1vw;
     margin-left: 40%;
-
 }
 
 #yellow {
@@ -61,19 +70,11 @@ body {
 #duck {
     margin-left: 39%;
 }
+
 #messageWrapper {
     position: relative;
 }
-h1 {
-    position: absolute;
-    margin-left: 23%;
-    margin-top: 15%;
-    font-size: 4vw;
-    color: white;
-    text-shadow: .1em .1em .05em #888;
-    line-height: 150%;
-    z-index: 2;
-}
+
 button {
     margin-top: 1.5vw;
     margin-left: 44%;
