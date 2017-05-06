@@ -16,6 +16,7 @@ body {
 #masterContainer::after {
     content: "";
     background: url(../img/codeupLogo.png) no-repeat center center fixed;
+    background-size: contain;
     opacity: 0.3;
     top: 0;
     left: 0;

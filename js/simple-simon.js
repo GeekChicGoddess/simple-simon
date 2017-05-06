@@ -1,4 +1,4 @@
-
+$("document").ready(function(){
 "use strict";
 var simonArray= [];
 var simonSoundArray = [];
@@ -162,6 +162,7 @@ $("button").click(function(){
         play();
     }, 500);
 });
+
 function arrowKeys() {
     console.log("arrowkeys");
     $(document).keyup(function(e){
@@ -182,7 +183,6 @@ function arrowKeys() {
     });
 
 }
-
 
 function tileClick() {
     color = $(this).attr("id");
@@ -253,3 +253,4 @@ function playerfunction() {
 $(".imageButton").off('click', tileClick);
 $(document).off( "keyup" );
 
+});
